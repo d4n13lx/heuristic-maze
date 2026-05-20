@@ -16,8 +16,6 @@ public class Main {
         int linhas = scanner.nextInt();
         System.out.print("Informe a quantidade de colunas: ");
         int colunas = scanner.nextInt();
-
-        // 5.2 - Tratamento de Exceção: Tamanho Inválido de Labirinto
         if (linhas < 3 || colunas < 3) {
             System.out.println("Aviso: Tamanho fornecido menor que 3x3. Forçando tamanho padrão de 5x5.");
             linhas = 5;
@@ -31,14 +29,13 @@ public class Main {
 
         System.out.println("\nGerando labirinto e validando caminho...");
 
-        // A inteligência de garantir o caminho (RF04) está aqui, separada do Model
         int tentativasLimitadas = 0;
         while (tentativasLimitadas < 1000) { // Limite de segurança para evitar loop infinito
             labirinto.gerar(); // O model apenas gera o mapa
             caminho = busca.buscarCaminho(labirinto); // O search apenas busca
 
             if (caminho != null) {
-                break; // Achamos um mapa com caminho possível!
+                break; // Achamos um mapa com caminho possível
             }
             tentativasLimitadas++;
         }
@@ -46,7 +43,6 @@ public class Main {
         System.out.println("\nLabirinto Inicial:");
         view.exibirLabirintoPuro(labirinto);
 
-        // 5.2 - Tratamento de Exceção: Caminho Inexistente (Fallback obrigatório)
         if (caminho != null) {
             int custoG = caminho.size() - 1; // Subtrai a célula inicial para contar os "passos"
             System.out.println("\nCaminho encontrado com sucesso!");
@@ -57,7 +53,6 @@ public class Main {
 
             System.out.println("\nLabirinto Resolvido com Sucesso!");
         } else {
-            // Este print é EXIGÊNCIA EXPLÍCITA do documento caso o laço falhasse
             System.out.println("Aviso: Nenhum caminho possível encontrado entre o Rato e o Queijo");
         }
 
