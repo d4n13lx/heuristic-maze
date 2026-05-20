@@ -37,11 +37,10 @@ public class AlgoritmoBusca {
                     int h = calcularManhattan(vizinhoPos, destino);
                     Celula novoVizinho = new Celula(vizinhoPos, atual, novoG, h);
 
-                    // Regra de Negócio: Atualização correta da Lista Aberta
                     boolean adicionar = true;
                     for (Celula c : listaAberta) {
                         if (c.getPosicao().equals(vizinhoPos) && c.getCustoG() <= novoG) {
-                            adicionar = false; // Já temos um caminho melhor ou igual para cá
+                            adicionar = false; // Caminho melhor ou igual para cá
                             break;
                         }
                     }
